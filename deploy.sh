@@ -4,6 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 npm run build
 WT=$(mktemp -d)
+git branch -D gh-pages -q 2>/dev/null || true
 git worktree add -q --detach "$WT"
 (
   cd "$WT"
