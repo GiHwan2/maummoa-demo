@@ -23,7 +23,7 @@ export const doctors: Doctor[] = [
 ];
 
 /** Doctor list card (763:673 / 763:502). `starIcon` differs between the home and list exports; both are passed in. */
-export function DoctorCard({ d, starIcon, reviews, available }: { d: Doctor; starIcon: string; reviews?: number; available?: boolean }) {
+export function DoctorCard({ d, starIcon, reviews, available, photoSize = 60 }: { d: Doctor; starIcon: string; reviews?: number; available?: boolean; photoSize?: number }) {
   const navigate = useNavigate();
   return (
     <button type="button" onClick={() => navigate(`/doctors/${d.id}`)} className="bg-white content-stretch flex gap-[4px] items-start px-[20px] py-[16px] relative rounded-[12px] shrink-0 w-full">
@@ -57,7 +57,8 @@ export function DoctorCard({ d, starIcon, reviews, available }: { d: Doctor; sta
           </div>
         )}
       </div>
-      <div className="aspect-[60/60] relative rounded-[12px] self-stretch shrink-0">
+      {/* Figma: square photo, 60×60 on the home card and 85×85 on the list card (self-stretch × 1:1). */}
+      <div className="relative rounded-[12px] shrink-0" style={{ width: photoSize, height: photoSize }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[12px]">
           <img alt="" className="absolute left-0 max-w-none w-full" style={{ height: d.photoH, top: d.photoTop }} src={d.photo} />
         </div>

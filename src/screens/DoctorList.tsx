@@ -49,11 +49,11 @@ export default function DoctorList() {
       </div>
 
       <div className="content-stretch flex flex-col gap-[8px] items-start px-[24px] py-[12px] relative shrink-0 w-full">
-        <DoctorCard d={doctors[0]} starIcon={img.starList} reviews={86} available />
-        <DoctorCard d={doctors[1]} starIcon={img.starList} reviews={353} available />
-        <DoctorCard d={doctors[2]} starIcon={img.starList} reviews={45} available />
-        <DoctorCard d={doctors[3]} starIcon={img.starList} reviews={96} available />
-        <DoctorCard d={doctors[0]} starIcon={img.starList} reviews={353} available />
+        <DoctorCard d={doctors[0]} starIcon={img.starList} reviews={86} available photoSize={85} />
+        <DoctorCard d={doctors[1]} starIcon={img.starList} reviews={353} available photoSize={85} />
+        <DoctorCard d={doctors[2]} starIcon={img.starList} reviews={45} available photoSize={85} />
+        <DoctorCard d={doctors[3]} starIcon={img.starList} reviews={96} available photoSize={85} />
+        <DoctorCard d={doctors[0]} starIcon={img.starList} reviews={353} available photoSize={85} />
       </div>
 
       <BottomNav shadow="rgba(0,0,0,0.08)" />

@@ -6,25 +6,22 @@ import { BottomCta, Phone, ProgressBar, StepTitle, TopBar } from "../components/
 const SEL = "bg-[#f0fff2] border-[#41cc58] text-[#2db243] font-semibold";
 const IDLE = "border-[#e5e5ec] text-[#1d1d1d] font-medium";
 
-function Slot({ t, on, onClick, fixed }: { t: string; on: boolean; onClick: () => void; fixed?: boolean }) {
+function Slot({ t, on, onClick }: { t: string; on: boolean; onClick: () => void }) {
   return (
-    <button type="button" onClick={onClick} className={`border border-solid content-stretch flex h-full items-center justify-center p-[17px] relative rounded-[8px] ${fixed ? "shrink-0 w-[103px]" : "flex-[1_0_0] min-w-px"} ${on ? SEL : IDLE}`}>
+    <button type="button" onClick={onClick} className={`border border-solid content-stretch flex h-[36px] items-center justify-center p-[17px] relative rounded-[8px] min-w-0 ${on ? SEL : IDLE}`}>
       <p className="[word-break:break-word] leading-[1.4] not-italic relative shrink-0 text-[14px] tracking-[-0.35px] whitespace-nowrap">{t}</p>
     </button>
   );
 }
 
-function Slots({ title, rows, value, onPick }: { title: string; rows: string[][]; value: string | null; onPick: (t: string) => void }) {
+/** Figma lays slots on a 3-column grid (each 103.67px of 327) with 8px column / 6px row gaps; a lone slot in the last row keeps the same width. */
+function Slots({ title, slots, value, onPick }: { title: string; slots: string[]; value: string | null; onPick: (t: string) => void }) {
   return (
     <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
       <p className="[word-break:break-word] font-semibold leading-[1.4] not-italic relative shrink-0 text-[#1d1d1d] text-[16px] tracking-[-0.4px] whitespace-nowrap">{title}</p>
-      <div className="content-stretch flex flex-col gap-[6px] items-start relative shrink-0 w-full">
-        {rows.map((row, i) => (
-          <div key={i} className={`content-stretch flex gap-[8px] h-[36px] items-center ${row.length === 3 ? "justify-center" : ""} relative shrink-0 w-full`}>
-            {row.map((t) => (
-              <Slot key={t} t={t} on={value === t} onClick={() => onPick(t)} fixed={row.length === 1} />
-            ))}
-          </div>
+      <div className="grid grid-cols-3 gap-x-[8px] gap-y-[6px] relative shrink-0 w-full">
+        {slots.map((t) => (
+          <Slot key={t} t={t} on={value === t} onClick={() => onPick(t)} />
         ))}
       </div>
     </div>
@@ -51,8 +48,8 @@ export default function BookingTime() {
             <p className="[word-break:break-word] leading-[1.4] not-italic relative shrink-0 text-[14px] tracking-[-0.35px] whitespace-nowrap">내일</p>
           </button>
         </div>
-        <Slots title="오전" rows={[["11:20", "11:30", "11:40"], ["11:50"]]} value={time} onPick={setTime} />
-        <Slots title="오후" rows={[["14:30", "14:40", "14:50"], ["15:00", "15:10", "15:20"], ["15:30"]]} value={time} onPick={setTime} />
+        <Slots title="오전" slots={["11:20", "11:30", "11:40", "11:50"]} value={time} onPick={setTime} />
+        <Slots title="오후" slots={["14:30", "14:40", "14:50", "15:00", "15:10", "15:20", "15:30"]} value={time} onPick={setTime} />
       </div>
       <BottomCta onClick={() => navigate("/booking/form")}>다음</BottomCta>
     </Phone>
