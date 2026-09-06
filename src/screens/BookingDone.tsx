@@ -56,7 +56,8 @@ export default function BookingDone() {
           </div>
 
           <div className="content-stretch flex flex-col gap-[8px] items-center relative shrink-0 w-full">
-            <button type="button" onClick={() => navigate("/home")} className="bg-[#41cc58] content-stretch flex h-[48px] items-center justify-center overflow-clip px-[63px] py-[8px] relative rounded-[8px] shrink-0 w-full">
+            {/* Demo flow: "홈으로" continues straight into the consultation call so a reviewer reaches every screen in order. */}
+            <button type="button" onClick={() => navigate("/call")} className="bg-[#41cc58] content-stretch flex h-[48px] items-center justify-center overflow-clip px-[63px] py-[8px] relative rounded-[8px] shrink-0 w-full">
               <p className="[word-break:break-word] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-center text-white tracking-[-0.4px] whitespace-nowrap">홈으로</p>
             </button>
             <button type="button" onClick={() => navigate("/booking/time")} className="bg-white border border-[#e5e5ec] border-solid content-stretch flex h-[48px] items-center justify-center overflow-clip px-[63px] py-[8px] relative rounded-[8px] shrink-0 w-full">
